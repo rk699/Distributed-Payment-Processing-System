@@ -1,9 +1,14 @@
-package com.paymenttech.kafka;
+package com.paymenttech.PaymentProcessor.kafka;
 
 
-import com.paymenttech.dto.PaymentEvent;
+import com.paymenttech.PaymentProcessor.dto.PaymentEvent;
+import com.paymenttech.PaymentProcessor.service.IdempotencyService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -14,7 +19,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class PaymentProducer {
-    
+//	private static final Logger log =
+//            LoggerFactory.getLogger(PaymentProducer.class);
+	
     private final KafkaTemplate<String, PaymentEvent> kafkaTemplate;
     
     private static final String PAYMENT_TOPIC = "payment-events";
@@ -26,7 +33,7 @@ public class PaymentProducer {
             Message<PaymentEvent> message = MessageBuilder
                     .withPayload(event)
                     .setHeader(KafkaHeaders.TOPIC, PAYMENT_TOPIC)
-                    .setHeader(KafkaHeaders.MESSAGE_KEY, event.getTransactionId())
+//                    .setHeader(KafkaHeaders.MESSAGE_KEY, event.getTransactionId())
                     .build();
             
             kafkaTemplate.send(message).whenComplete((result, ex) -> {
@@ -47,7 +54,7 @@ public class PaymentProducer {
             Message<PaymentEvent> message = MessageBuilder
                     .withPayload(event)
                     .setHeader(KafkaHeaders.TOPIC, RETRY_TOPIC)
-                    .setHeader(KafkaHeaders.MESSAGE_KEY, event.getTransactionId())
+//                    .setHeader(KafkaHeaders.MESSAGE_KEY, event.getTransactionId())
                     .build();
             
             kafkaTemplate.send(message);
@@ -62,7 +69,7 @@ public class PaymentProducer {
             Message<PaymentEvent> message = MessageBuilder
                     .withPayload(event)
                     .setHeader(KafkaHeaders.TOPIC, DLQ_TOPIC)
-                    .setHeader(KafkaHeaders.MESSAGE_KEY, event.getTransactionId())
+//                    .setHeader(KafkaHeaders.MESSAGE_KEY, event.getTransactionId())
                     .build();
             
             kafkaTemplate.send(message);
@@ -71,4 +78,4 @@ public class PaymentProducer {
             log.error("Error publishing to DLQ", e);
         }
     }
-}
+} 

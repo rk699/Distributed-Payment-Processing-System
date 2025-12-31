@@ -1,14 +1,16 @@
-package com.paymenttech.repository;
+package com.paymenttech.PaymentProcessor.repository;
 
 
-import com.paymenttech.domain.Payment;
-import com.paymenttech.domain.PaymentStatus;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.paymenttech.PaymentProcessor.domain.Payment;
+import com.paymenttech.PaymentProcessor.domain.PaymentStatus;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, String> {

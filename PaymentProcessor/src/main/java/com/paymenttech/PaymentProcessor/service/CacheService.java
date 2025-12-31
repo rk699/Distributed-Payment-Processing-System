@@ -1,17 +1,19 @@
-package com.paymenttech.service;
+package com.paymenttech.PaymentProcessor.service;
 
 
-import com.paymenttech.dto.PaymentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import com.paymenttech.PaymentProcessor.dto.PaymentResponse;
+
 import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class CacheService {
     
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
     private static final String CACHE_PREFIX = "payment:";
     private static final long CACHE_TTL_MINUTES = 30;
     

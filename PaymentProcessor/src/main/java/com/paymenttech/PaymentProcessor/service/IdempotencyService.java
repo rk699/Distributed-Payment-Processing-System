@@ -1,11 +1,15 @@
-package com.paymenttech.service;
+package com.paymenttech.PaymentProcessor.service;
 
 
-import com.paymenttech.domain.Payment;
-import com.paymenttech.repository.PaymentRepository;
-import com.paymenttech.dto.PaymentResponse;
+import com.paymenttech.PaymentProcessor.domain.Payment;
+import com.paymenttech.PaymentProcessor.dto.PaymentResponse;
+import com.paymenttech.PaymentProcessor.repository.PaymentRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -14,8 +18,8 @@ import java.util.Optional;
 @Slf4j
 public class IdempotencyService {
     
-    private final PaymentRepository paymentRepository;
-    private final CacheService cacheService;
+    private final PaymentRepository paymentRepository = null;
+    private final CacheService cacheService = new CacheService();
     
     public Optional<PaymentResponse> getIdempotentResult(String idempotencyKey) {
         log.debug("Checking idempotency for key: {}", idempotencyKey);

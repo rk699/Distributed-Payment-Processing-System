@@ -1,9 +1,13 @@
-package com.paymenttech.kafka;
+package com.paymenttech.PaymentProcessor.kafka;
 
-import com.paymenttech.dto.PaymentEvent;
-import com.paymenttech.service.PaymentService;
+import com.paymenttech.PaymentProcessor.dto.PaymentEvent;
+import com.paymenttech.PaymentProcessor.service.PaymentService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import java.util.Random;
@@ -13,7 +17,7 @@ import java.util.Random;
 @Slf4j
 public class PaymentConsumer {
     
-    private final PaymentService paymentService;
+    private final PaymentService paymentService = null;
     private final Random random = new Random();
     
     @KafkaListener(topics = "payment-events", groupId = "payment-processor-group", concurrency = "10")

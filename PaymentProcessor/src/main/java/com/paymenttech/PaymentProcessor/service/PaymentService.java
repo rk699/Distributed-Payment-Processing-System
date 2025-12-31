@@ -1,9 +1,10 @@
-package com.paymenttech.service;
+package com.paymenttech.PaymentProcessor.service;
 
 
-import com.paymenttech.dto.PaymentRequest;
-import com.paymenttech.dto.PaymentResponse;
 import java.util.Optional;
+
+import com.paymenttech.PaymentProcessor.dto.PaymentRequest;
+import com.paymenttech.PaymentProcessor.dto.PaymentResponse;
 
 public interface PaymentService {
     
