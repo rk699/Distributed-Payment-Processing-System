@@ -1,4 +1,4 @@
-package com.paymenttech.kafka;
+package com.paymenttech.PaymentProcessor.kafka;
 
 public class PaymentEventListener {
 

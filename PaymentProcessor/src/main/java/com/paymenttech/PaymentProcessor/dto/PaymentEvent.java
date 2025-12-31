@@ -1,8 +1,8 @@
-package com.paymenttech.dto;
+package com.paymenttech.PaymentProcessor.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.paymenttech.domain.PaymentStatus;
+import com.paymenttech.PaymentProcessor.domain.PaymentStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

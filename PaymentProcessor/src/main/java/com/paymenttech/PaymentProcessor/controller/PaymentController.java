@@ -1,8 +1,8 @@
-package com.paymenttech.controller;
+package com.paymenttech.PaymentProcessor.controller;
 
-import com.paymenttech.dto.PaymentRequest;
-import com.paymenttech.dto.PaymentResponse;
-import com.paymenttech.service.PaymentService;
+import com.paymenttech.PaymentProcessor.dto.PaymentRequest;
+import com.paymenttech.PaymentProcessor.dto.PaymentResponse;
+import com.paymenttech.PaymentProcessor.service.PaymentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class PaymentController {
     
-    private final PaymentService paymentService;
+    private final PaymentServiceImpl paymentService;
     
     @PostMapping
     public ResponseEntity<PaymentResponse> processPayment(@RequestBody PaymentRequest request) {

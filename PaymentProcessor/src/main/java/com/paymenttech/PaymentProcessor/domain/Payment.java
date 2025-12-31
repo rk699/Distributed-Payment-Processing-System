@@ -1,4 +1,4 @@
-package com.paymenttech.domain;
+package com.paymenttech.PaymentProcessor.domain;
 
 
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.paymenttech.controller;
+package com.paymenttech.PaymentProcessor.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

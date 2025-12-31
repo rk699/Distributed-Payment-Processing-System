@@ -1,4 +1,4 @@
-package com.paymenttech.exception;
+package com.paymenttech.PaymentProcessor.exception;
 
 public class IdempotencyException extends RuntimeException {
     

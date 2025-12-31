@@ -1,4 +1,4 @@
-package com.paymenttech.dto;
+package com.paymenttech.PaymentProcessor.dto;
 
 
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.paymenttech.dto;
+package com.paymenttech.PaymentProcessor.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.paymenttech.domain.PaymentStatus;
+import com.paymenttech.PaymentProcessor.domain.PaymentStatus;
 
 @Data
 @NoArgsConstructor

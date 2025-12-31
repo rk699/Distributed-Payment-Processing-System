@@ -1,4 +1,4 @@
-package com.paymenttech.config;
+package com.paymenttech.PaymentProcessor.config;
 
 
 import org.springframework.context.annotation.Configuration;
