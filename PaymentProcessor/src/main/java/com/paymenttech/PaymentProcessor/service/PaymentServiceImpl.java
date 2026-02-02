@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +28,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PaymentServiceImpl implements PaymentService {
 	
-	
+	@Autowired
     private final PaymentRepository paymentRepository;
+    @Autowired
     private final TransactionRepository transactionRepository;
+    @Autowired
     private final PaymentProducer paymentProducer;
+    @Autowired
     private final IdempotencyService idempotencyService;
+    @Autowired
     private final CacheService cacheService;
     
     @Override

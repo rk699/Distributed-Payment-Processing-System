@@ -17,7 +17,7 @@ import java.util.Random;
 @Slf4j
 public class PaymentConsumer {
     
-    private final PaymentService paymentService = null;
+    private final PaymentService paymentService;
     private final Random random = new Random();
     
     @KafkaListener(topics = "payment-events", groupId = "payment-processor-group", concurrency = "10")

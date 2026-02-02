@@ -18,8 +18,8 @@ import java.util.Optional;
 @Slf4j
 public class IdempotencyService {
     
-    private final PaymentRepository paymentRepository = null;
-    private final CacheService cacheService = new CacheService();
+    private final PaymentRepository paymentRepository;
+    private final CacheService cacheService ;
     
     public Optional<PaymentResponse> getIdempotentResult(String idempotencyKey) {
         log.debug("Checking idempotency for key: {}", idempotencyKey);

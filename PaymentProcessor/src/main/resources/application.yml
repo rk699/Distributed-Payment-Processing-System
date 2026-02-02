@@ -7,10 +7,10 @@ spring:
 
  
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:C:/Users/purus/test
     driver-class-name: org.h2.Driver
     username: sa
-    password: 12345
+    password:
   jpa:
     hibernate:
       ddl-auto: update             # can also use create-drop for tests
@@ -91,5 +91,5 @@ management:
       show-details: always
   metrics:
     export:
-#      prometheus:
-#        enabled: true
+      prometheus:
+        enabled: true

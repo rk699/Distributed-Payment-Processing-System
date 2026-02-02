@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class CacheService {
     
-    private final RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+    private final RedisTemplate<String, Object> redisTemplate ;
     private static final String CACHE_PREFIX = "payment:";
     private static final long CACHE_TTL_MINUTES = 30;
     
