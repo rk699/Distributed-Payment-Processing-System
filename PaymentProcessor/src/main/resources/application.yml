@@ -13,7 +13,7 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: update             # can also use create-drop for tests
+      ddl-auto: create             # can also use create-drop for tests
     show-sql: true                 # H2 is lightweight, so you can enable SQL logging
     properties:
       hibernate:

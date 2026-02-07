@@ -35,7 +35,7 @@ public class RetryService {
     public void processPaymentWithRetry(PaymentEvent event) {
         try {
             paymentProducer.publishPaymentEvent(event);
-            log.info("Payment processed successfully: {}", event.getTransactionId());
+            log.info("Payment processed successfully Retry: {}", event.getTransactionId());
         } catch (Exception e) {
             log.error("Payment processing failed: {}", event.getTransactionId(), e);
             scheduleRetry(event);

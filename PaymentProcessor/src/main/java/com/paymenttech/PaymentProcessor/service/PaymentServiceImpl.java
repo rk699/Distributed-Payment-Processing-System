@@ -60,6 +60,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .currency(request.getCurrency())
                 .sourceAccount(request.getSourceAccount())
                 .destinationAccount(request.getDestinationAccount())
+                .description(request.getDescription())
                 .status(PaymentStatus.PENDING)
                 .createdAt(LocalDateTime.now())
                 .build();

@@ -28,7 +28,7 @@ public class PaymentConsumer {
             // Simulate payment processing with random success (simulating 95% success rate)
             if (random.nextDouble() < 0.95) {
                 paymentService.handlePaymentSuccess(event.getTransactionId());
-                log.info("Payment processed successfully: {}", event.getTransactionId());
+                log.info("Payment processed successfully consumer: {}", event.getTransactionId());
             } else {
                 paymentService.handlePaymentFailure(event.getTransactionId(), "Simulated processing failure");
                 log.warn("Payment processing failed: {}", event.getTransactionId());

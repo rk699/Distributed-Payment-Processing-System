@@ -53,7 +53,10 @@ public class Payment {
     private LocalDateTime createdAt;
     
     private LocalDateTime processedAt;
-    
+
+    @Column(nullable = false)
+    private String description;
+
     @Version
     private Long version;
 }
