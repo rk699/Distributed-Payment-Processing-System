@@ -24,27 +24,50 @@ import java.time.Duration;
 @EnableCaching
 public class RedisConfig {
 
-    // 1. Connection factory
+//    @Cacheable
+//   ↓
+//    CacheManager
+//   ↓
+//    RedisCacheConfiguration
+//   ↓
+//    Redis
+
+
+    // 1. RedisConnectionFactory manages Redis connections and is the backbone
+    //      for RedisTemplate and Spring Cache operations.
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         return new LettuceConnectionFactory();
     }
 
     // 2. RedisTemplate bean (important!)
+    //Redis stores bytes, not Java object
+    //RedisTemplate converts:
+    //Java Object ↔ Bytes ↔ Redis
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
+
+//        Uses Lettuce connection pool
+//        Thread-safe, reusable connections
         template.setConnectionFactory(factory);
 
+//        Handles LocalDateTime, Instant
+//        Avoids unreadable timestamps
+//        Ensures Redis data is human-readable
+//
+//        Without this → Jackson errors or ugly data
         ObjectMapper mapper = JsonMapper.builder()
                 .addModule(new JavaTimeModule())
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .build();
 
         GenericJackson2JsonRedisSerializer serializer =
-                new GenericJackson2JsonRedisSerializer(mapper);
+                new GenericJackson2JsonRedisSerializer(mapper);//Converts any Java object → JSON
 
         // Key serializer
+//        Redis keys should be readable
+//        Prevents garbage byte keys
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
 
@@ -54,14 +77,19 @@ public class RedisConfig {
 
         // Initialize template
         template.afterPropertiesSet();
+//        Finalizes configuration
+//
+//        Mandatory for proper initialization
         return template;
     }
 
+//    👉 This is NOT RedisTemplate
+//👉 This is Spring Cache behavior config
     // 3. Cache configuration
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
         return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(30))
+                .entryTtl(Duration.ofMinutes(30))//Cache expires after 30 minutes
                 .serializeKeysWith(
                         RedisSerializationContext.SerializationPair
                                 .fromSerializer(new StringRedisSerializer())
@@ -70,13 +98,32 @@ public class RedisConfig {
                         RedisSerializationContext.SerializationPair
                                 .fromSerializer(new Jackson2JsonRedisSerializer<>(Object.class))
                 );
+
+//        Redis keys must be:
+//        Human readable
+//        Stable
+//        Predictable
     }
 
+
+//    @Cacheable does not talk to Redis directly
+//    Spring needs a manager to:
+//    Decide where to cache
+//    Apply rules (TTL, serializer)
+//    Create cache regions
+//    No CacheManager → caching fails silently
     // 4. Cache manager using our custom configuration
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory factory) {
         return RedisCacheManager.builder(factory)
                 .cacheDefaults(cacheConfiguration()) // ✅ Important
                 .build();
+
+//        Applies:
+//        TTL
+//        Key serializer
+//        Value serializer
+//        Finalizes configuration
+//        Registers bean in Spring context
     }
 }

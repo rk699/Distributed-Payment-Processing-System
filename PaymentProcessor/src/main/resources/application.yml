@@ -55,7 +55,7 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /
+    context-path: /processPay
   compression:
     enabled: true
     min-response-size: 1024
